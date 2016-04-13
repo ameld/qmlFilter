@@ -6,7 +6,7 @@ import my.filter 1.0
 Window {
     visible: true
     height: 400
-    width:  350
+    width:  600
 
     Camera {
         id: camera_0
