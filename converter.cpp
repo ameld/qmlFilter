@@ -179,11 +179,14 @@ namespace convert {
 
     cv::Mat gray;
     cv::cvtColor(mat_img, gray, CV_BGR2GRAY);
+    cv::Canny(gray, gray, 40, 150);
     cv::cvtColor(gray, mat_img, CV_GRAY2BGR);
-    cv::imwrite("cv_MAT.png", mat_img); // REMOVE_FINISH
-    QImage q_img = matToImage(&mat_img);
+    cv::imwrite("cv_MAT.png", gray); // REMOVE_FINISH
+    QImage q_img; // = matToImage(&gray);
+    q_img = QtOcv::mat2Image(mat_img, QtOcv::MCO_BGR, QImage::Format_RGB32);
+    q_img.save("QImg.png", "PNG");
 
-   // QImage::Format imageFormat = QVideoFrame::imageFormatFromPixelFormat(format);
+    // QImage::Format imageFormat = QVideoFrame::imageFormatFromPixelFormat(format);
    // QImage q_img(video_frame->bits(), video_frame->width(), video_frame->height(),
    //              video_frame->bytesPerLine(), imageFormat);
 
@@ -202,12 +205,14 @@ namespace convert {
   //----------------------------------------------------------------------------
   QImage matToImage(cv::Mat *mat_img)
   {
-    cv::Mat temp(mat_img->cols, mat_img->rows, mat_img->type());
+    //cv::Mat temp(mat_img->cols, mat_img->rows, mat_img->type());
 
-    cv::cvtColor(*mat_img, temp, CV_BGR2RGB);
+    cv::Mat temp = *mat_img;
+    uchar *image_data = temp.data;
+    //cv::cvtColor(*mat_img, temp, CV_BGR2RGB);
 
-    QImage q_img = QImage((uchar*)temp.data, temp.cols, temp.rows, temp.step,
-                        QImage::Format_RGB32);
+    QImage q_img = QImage(image_data, temp.cols, temp.rows, temp.step,
+                        QImage::Format_Indexed8);
     return q_img;
 
 

@@ -6,8 +6,9 @@ CONFIG += c++11 opencv
 SOURCES += main.cpp \
     MyFilte.cpp \
     MyFilterRunnable.cpp \
-    FormatConvert.cpp \
-    converter.cpp
+    converter.cpp	\
+    cvmatandqimage.cpp \
+    FrameToImage.cpp
 
 RESOURCES += qml.qrc
 
@@ -21,8 +22,9 @@ include(deployment.pri)
 HEADERS += \
     MyFilter.h \
     MyFilterRunnable.h \
-    FormatConvert.h \
-    converter.h
+    converter.h \
+    cvmatandqimage.h  \
+    FrameToImage.h
 
 
 

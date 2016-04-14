@@ -6,6 +6,8 @@
 #include <opencv/highgui.h>
 #include <opencv/cv.hpp>
 
+#include "cvmatandqimage.h"
+
 #define CHANNEL_SIZE 8
 
 namespace convert {
